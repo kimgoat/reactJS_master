@@ -1,9 +1,14 @@
 import styled from "styled-components";
 
-const Container = styled.div`
+interface ContainerProps {
+  bgColor: string;
+}
+
+const Container = styled.div<ContainerProps>`
   width: 100px;
   height: 100px;
-  background-color: ${(props) => props.color};
+  background-color: ${(props) => props.bgColor};
+  border-radius: 100px;
 `;
 
 interface CercleProps {
@@ -11,7 +16,7 @@ interface CercleProps {
 }
 
 function Cercle({ bgColor }: CercleProps) {
-  return <Container color={bgColor}></Container>;
+  return <Container bgColor={bgColor}></Container>;
 }
 
 export default Cercle;
