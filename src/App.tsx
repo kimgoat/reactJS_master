@@ -1,23 +1,13 @@
 import styled from "styled-components";
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-  background-color: ${(props) => props.theme.backgroundColor};
-`;
-
-const Text = styled.span`
-  color: ${(props) => props.theme.textColor};
-`;
+import Cercle from "./Cercle";
 
 function App() {
   return (
-    <Wrapper>
-      <Text>Hello</Text>
-    </Wrapper>
+    <div>
+      <Cercle bgColor="pink" />
+      <Cercle bgColor="black" />
+      <Cercle bgColor="skyblue" />
+    </div>
   );
 }
 
