@@ -1,33 +1,33 @@
 import { useState } from "react";
 import styled from "styled-components";
 
+const Container = styled.div`
+  background-color: ${(props) => props.theme.bgColor};
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const H1 = styled.h1`
+  color: ${(props) => props.theme.textColor};
+`;
+
+const Btn = styled.button`
+  color: ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.btnColor};
+  border: 0;
+  border-radius: 20px;
+  width: 100px;
+  height: 30px;
+`;
+
 function App() {
-  const [value, setValue] = useState("");
-
-  const onChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const {
-      currentTarget: { value },
-    } = e;
-    setValue(value);
-  };
-
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(value);
-  };
-
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <input
-          value={value}
-          onChange={onChange}
-          type="text"
-          placeholder="username"
-        />
-        <button> Log in</button>
-      </form>
-    </div>
+    <Container>
+      <H1>Hello?</H1>
+      <Btn>✋ 안녕</Btn>
+    </Container>
   );
 }
 
