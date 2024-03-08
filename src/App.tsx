@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;
@@ -6,14 +6,12 @@ const Wrapper = styled.div`
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-color: ${props => props.theme.backgroundColor};
+  background-color: ${(props) => props.theme.backgroundColor};
 `;
 
 const Text = styled.span`
-  color: ${props => props.theme.textColor};
+  color: ${(props) => props.theme.textColor};
 `;
-
-
 
 function App() {
   return (
