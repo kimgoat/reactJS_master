@@ -6,11 +6,11 @@ const Container = styled.div`
   background-color: ${(props) => props.color};
 `;
 
-export interface CercleProps {
+interface CercleProps {
   bgColor: string;
 }
 
-function Cercle({ bgColor, ...rest }: CercleProps) {
+function Cercle({ bgColor }: CercleProps) {
   return <Container color={bgColor}></Container>;
 }
 
