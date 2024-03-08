@@ -4,20 +4,20 @@ const Container = styled.div`
   display: flex;
 `;
 
-const Btn = styled.button`
-  color: pink;
-  background-color: black;
-  border: 0;
-  border-radius: 20px;
-  width: 50px;
+const Input = styled.input.attrs({ required: true })`
+  background-color: pink;
 `;
 
 
 function App() {
   return (
     <Container>
-      <Btn>Log in</Btn>
-      <Btn as="a" href="https://styled-components.com/docs/basics">Log in</Btn>
+      <Input />
+      <Input />
+      <Input />
+      <Input />
+      <Input />
+      <Input />
     </Container>
   );
 }
