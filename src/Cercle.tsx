@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
-interface ContainerProps {
-  bgColor: string;
-}
-
-const Container = styled.div<ContainerProps>`
+const Container = styled.div<CercleProps>`
   width: 100px;
   height: 100px;
   background-color: ${(props) => props.bgColor};
