@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import { styled } from "styled-components";
 
 const Container = styled.div`
@@ -30,16 +30,40 @@ const Loader = styled.span`
 //   name: string;
 // }
 
+interface PriceInterface {
+  price: number;
+  ath_price: number;
+  ath_date: string;
+}
+
 export default function Coin() {
   const [loading, setLoading] = useState(true);
+  const { coinId } = useParams();
   const { state } = useLocation();
+  const [info, setInfo] = useState({});
+  const [priceInfo, setPriceInfo] = useState({});
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetch(
+        `https://api.coinpaprika.com/v1/coins/${coinId}`
+      );
+      const infoData = await response.json();
+      const priceData = await (
+        await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`)
+      ).json();
+      setInfo(infoData);
+      setPriceInfo(priceData);
+      setLoading(false);
+    })();
+  }, []);
 
   return (
     <Container>
       <Header>
         <Title>{state?.name || "Loading..."}</Title>
       </Header>
-      {loading ? <Loader>Loading...</Loader> : <h1></h1>}
+      {loading ? <Loader>Loading...</Loader> : <h1>null</h1>}
     </Container>
   );
 }
