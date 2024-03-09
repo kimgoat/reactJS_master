@@ -26,7 +26,8 @@ const Coin = styled.li`
   a {
     padding: 20px;
     transition: color 0.2s ease-in;
-    display: block;
+    display: flex;
+    align-items: center;
   }
   &:hover {
     a {
@@ -34,6 +35,11 @@ const Coin = styled.li`
       font-weight: 900;
     }
   }
+`;
+
+const Img = styled.img`
+  width: 30px;
+  margin-right: 10px;
 `;
 
 const Title = styled.h1`
@@ -81,7 +87,12 @@ export default function Coins() {
         <CoinsList>
           {coins.map((coin) => (
             <Coin key={coin.id}>
-              <Link to={`/${coin.id}`}>{coin.name} &rarr;</Link>
+              <Link to={`/${coin.id}`} state={{ name: coin.name }}>
+                <Img
+                  src={`https://static.coinpaprika.com/coin/${coin.id}/logo.png`}
+                />
+                {coin.name} &rarr;
+              </Link>
             </Coin>
           ))}
         </CoinsList>
