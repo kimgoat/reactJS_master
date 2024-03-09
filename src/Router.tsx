@@ -3,6 +3,8 @@ import Root from "./Root";
 import Coins from "./screens/Coins";
 import ErrorComponent from "./components/ErrorComponent";
 import Coin from "./screens/Coin";
+import Price from "./screens/Price";
+import Chart from "./screens/Chart";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +19,16 @@ const router = createBrowserRouter([
       {
         path: "/:coinId",
         element: <Coin />,
+        children: [
+          {
+            path: "price",
+            element: <Price />,
+          },
+          {
+            path: "chart",
+            element: <Chart />,
+          },
+        ],
       },
     ],
   },
