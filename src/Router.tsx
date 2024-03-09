@@ -1,11 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "./screens/Home";
-import About from "./screens/About";
 import Root from "./Root";
-import NotFound from "./screens/\bNotFound";
+import Coins from "./screens/Coins";
 import ErrorComponent from "./components/ErrorComponent";
-import User from "./screens/users/User";
-import Followers from "./screens/users/Followers";
+import Coin from "./screens/Coin";
 
 const router = createBrowserRouter([
   {
@@ -14,20 +11,14 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Home />,
+        element: <Coins />,
         errorElement: <ErrorComponent />,
       },
       {
-        path: "about",
-        element: <About />,
-      },
-      {
-        path: "users/:userId",
-        element: <User />,
-        children: [{ path: "followers", element: <Followers /> }],
+        path: "/:coinId",
+        element: <Coin />,
       },
     ],
-    errorElement: <NotFound />,
   },
 ]);
 
