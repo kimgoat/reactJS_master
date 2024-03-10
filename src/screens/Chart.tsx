@@ -77,6 +77,23 @@ function Chart() {
                 labels: {
                   show: false,
                 },
+                // type: "datetime",
+                categories: data?.map((price) => price.time_close),
+              },
+
+              fill: {
+                type: "gradient",
+                gradient: {
+                  gradientToColors: ["#2200ff"],
+                  stops: [0, 100],
+                },
+              },
+              colors: ["#de0000f7"],
+
+              tooltip: {
+                y: {
+                  formatter: (value: number) => `$${value.toFixed(2)}`,
+                },
               },
             }}
           />
