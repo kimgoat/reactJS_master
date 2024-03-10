@@ -22,7 +22,10 @@ function Chart() {
   const { coinId } = useOutletContext<IChartContext>();
   const { isLoading, data } = useQuery<IHistoricalData[]>(
     ["ohlcv", coinId],
-    () => fetchCoinHistory(coinId)
+    () => fetchCoinHistory(coinId),
+    {
+      refetchInterval: 10000,
+    }
   );
 
   console.log(data);
