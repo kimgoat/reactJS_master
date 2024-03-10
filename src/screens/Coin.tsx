@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Outlet, useLocation, useParams } from "react-router-dom";
 import { styled } from "styled-components";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
+import { Helmet } from "react-helmet";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -155,6 +156,15 @@ export default function Coin() {
 
   return (
     <Container>
+      <Helmet>
+        <link
+          rel="icon"
+          href={`https://static.coinpaprika.com/coin/${coinId}/logo.png`}
+        />
+        <title>
+          {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
+        </title>
+      </Helmet>
       <Header>
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
