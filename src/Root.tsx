@@ -64,7 +64,7 @@ function Root() {
     <>
       <GlobalStyle />
       <Outlet />
-      <ReactQueryDevtools />
+      <ReactQueryDevtools initialIsOpen={true} />
     </>
   );
 }
