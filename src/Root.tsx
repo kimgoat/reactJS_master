@@ -62,17 +62,11 @@ a{
 `;
 
 function Root() {
-  const [isDark, setIsDark] = useState(false);
-  const toggleDark = () => {
-    setIsDark((current) => !current);
-  };
-
-  console.log("parent: " + isDark);
   return (
     <>
-      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+      <ThemeProvider theme={true ? darkTheme : lightTheme}>
         <GlobalStyle />
-        <Outlet context={{ isDark, toggleDark }} />
+        <Outlet />
         <ReactQueryDevtools initialIsOpen={true} />
       </ThemeProvider>
     </>

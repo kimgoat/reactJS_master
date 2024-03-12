@@ -134,14 +134,9 @@ interface IPriceData {
   };
 }
 
-interface ICoinProps {
-  isDark: boolean;
-}
-
 export default function Coin() {
   const { coinId } = useParams();
   const { state } = useLocation();
-  const { isDark } = useOutletContext<ICoinProps>();
   const priceMatch = useMatch("/:coinId/price");
   const chartMatch = useMatch("/:coinId/chart");
 
@@ -216,7 +211,7 @@ export default function Coin() {
             </Tab>
           </Tabs>
 
-          <Outlet context={{ coinId, isDark }} />
+          <Outlet context={{ coinId }} />
         </>
       )}
     </Container>
