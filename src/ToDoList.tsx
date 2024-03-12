@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 
 /*
 export default function ToDoList() {
@@ -43,6 +43,7 @@ type IFormData = {
   email: string;
   password: string;
   checkPassword: string;
+  extraError?: string;
 };
 
 export default function ToDoList() {
@@ -51,25 +52,30 @@ export default function ToDoList() {
     watch,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<IFormData>({
     defaultValues: {
       email: "@naver.com",
     },
   });
-  const onValid = (data: any) => {
+  const onValid = (data: IFormData) => {
     // 필수로 handleSubmit에 넘겨줘야 함
-    console.log(data);
+    if (data.password !== data.checkPassword) {
+      setError(
+        "checkPassword",
+        { message: "Password are not the same" },
+        { shouldFocus: true }
+      );
+    }
+    // setError("extraError", { message: "Server Offline" }); // 강제로 Form에 error 발생시키기
   };
 
-  const onInValid = (data: any) => {
-    // 필수는 아님
-    console.log(errors);
-  };
+  //   console.log(errors);
 
   return (
     <>
       <h1>To Do List</h1>
-      <form onSubmit={handleSubmit(onValid, onInValid)}>
+      <form onSubmit={handleSubmit(onValid)}>
         <input
           {...register("email", {
             required: "email is required",
@@ -82,23 +88,38 @@ export default function ToDoList() {
         />
         <div>{errors?.email?.message}</div>
         <input
-          {...register("firstName", { required: true })}
+          {...register("firstName", {
+            required: true,
+            validate: {
+              noKim: (value) =>
+                value.includes("kim") ? "no kim allowed" : true,
+              noSeo: (value) =>
+                value.includes("seo") ? "no seo allowed" : true,
+            },
+          })}
           placeholder="First Name"
         />
+        <div>{errors?.firstName?.message}</div>
         <input
           {...register("lastName", { required: true })}
           placeholder="Last Name"
         />
+        <div>{errors?.lastName?.message}</div>
+
         <input
           {...register("userName", { required: true })}
           placeholder="User Name"
         />
+        <div>{errors?.userName?.message}</div>
+
         <input
           {...register("id", {
             required: { value: true, message: "ID를 입력해주세요." },
           })}
           placeholder="ID"
         />
+        <div>{errors?.id?.message}</div>
+
         <input
           {...register("password", {
             required: true,
@@ -113,13 +134,17 @@ export default function ToDoList() {
           })}
           placeholder="Password"
         />
+        <div>{errors?.password?.message}</div>
+
         <input
           {...register("checkPassword", {
             required: true,
           })}
           placeholder="Check Password"
         />
+        <div>{errors?.checkPassword?.message}</div>
         <button> Add</button>
+        <span>{errors?.extraError?.message}</span>
       </form>
     </>
   );
