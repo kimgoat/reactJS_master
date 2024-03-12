@@ -20,6 +20,7 @@ export default function ToDoList() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
     setError,
   } = useForm<IFormData>({
@@ -35,6 +36,14 @@ export default function ToDoList() {
         { message: "Password are not the same" },
         { shouldFocus: true }
       );
+    } else {
+      setValue("email", "");
+      setValue("firstName", "");
+      setValue("lastName", "");
+      setValue("userName", "");
+      setValue("id", "");
+      setValue("password", "");
+      setValue("checkPassword", "");
     }
     // setError("extraError", { message: "Server Offline" }); // 강제로 Form에 error 발생시키기
   };
