@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 /*
@@ -30,8 +30,32 @@ export default function ToDoList() {
 }
 */
 
+type IFormData = {
+  errors: {
+    email: {
+      message: string;
+    };
+  };
+  firstName: string;
+  lastName: string;
+  userName: string;
+  id: string;
+  email: string;
+  password: string;
+  checkPassword: string;
+};
+
 export default function ToDoList() {
-  const { register, watch, handleSubmit, formState } = useForm();
+  const {
+    register,
+    watch,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormData>({
+    defaultValues: {
+      email: "@naver.com",
+    },
+  });
   const onValid = (data: any) => {
     // 필수로 handleSubmit에 넘겨줘야 함
     console.log(data);
@@ -39,32 +63,34 @@ export default function ToDoList() {
 
   const onInValid = (data: any) => {
     // 필수는 아님
-    console.log(formState.errors);
+    console.log(errors);
   };
+
   return (
     <>
       <h1>To Do List</h1>
       <form onSubmit={handleSubmit(onValid, onInValid)}>
         <input
           {...register("email", {
-            required: true,
+            required: "email is required",
             pattern: {
-              value: /[A-Za-z]{3}/,
-              message: "알파벳이 3글자 이상 포함되어야 함(대소문자 구분 x)",
+              value: /^[A-Za-z0-9._%+-]+@naver.com/,
+              message: "Only naver.com emails allowed",
             },
           })}
           placeholder="Email"
         />
+        <div>{errors?.email?.message}</div>
         <input
-          {...register("first_name", { required: true })}
+          {...register("firstName", { required: true })}
           placeholder="First Name"
         />
         <input
-          {...register("last_name", { required: true })}
+          {...register("lastName", { required: true })}
           placeholder="Last Name"
         />
         <input
-          {...register("user_name", { required: true })}
+          {...register("userName", { required: true })}
           placeholder="User Name"
         />
         <input
@@ -76,12 +102,22 @@ export default function ToDoList() {
         <input
           {...register("password", {
             required: true,
+            pattern: {
+              value: /[A-Za-z]{3}/,
+              message: "알파벳 3글자 이상 포함되어야 함(대소문자 구분 x)",
+            },
             minLength: {
               value: 10,
               message: "password는 10글자 이상이어야 합니다.",
             },
           })}
           placeholder="Password"
+        />
+        <input
+          {...register("checkPassword", {
+            required: true,
+          })}
+          placeholder="Check Password"
         />
         <button> Add</button>
       </form>
