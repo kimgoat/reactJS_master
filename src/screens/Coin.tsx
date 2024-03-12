@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { useMatch } from "react-router-dom";
+import { useMatch, useOutletContext } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Outlet, useLocation, useParams } from "react-router-dom";
 import { styled } from "styled-components";
@@ -134,9 +134,14 @@ interface IPriceData {
   };
 }
 
+interface ICoinProps {
+  isDark: boolean;
+}
+
 export default function Coin() {
   const { coinId } = useParams();
   const { state } = useLocation();
+  const { isDark } = useOutletContext<ICoinProps>();
   const priceMatch = useMatch("/:coinId/price");
   const chartMatch = useMatch("/:coinId/chart");
 
@@ -211,7 +216,7 @@ export default function Coin() {
             </Tab>
           </Tabs>
 
-          <Outlet context={{ coinId }} />
+          <Outlet context={{ coinId, isDark }} />
         </>
       )}
     </Container>
