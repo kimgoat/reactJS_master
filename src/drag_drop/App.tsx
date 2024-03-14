@@ -25,7 +25,6 @@ export default function App() {
   const [toDos, setToDos] = useRecoilState(toDoStste2);
 
   const onDragEnd = (info: DropResult) => {
-    console.log(info);
     const { destination, draggableId, source } = info;
     if (destination?.droppableId === source.droppableId) {
       // same board movement.
@@ -39,6 +38,7 @@ export default function App() {
         };
       });
     } else {
+      // cross board movement.
       if (!destination) return;
       setToDos((allBoards) => {
         const prevBoard = [...allBoards[source.droppableId]];
