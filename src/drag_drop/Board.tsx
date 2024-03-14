@@ -1,6 +1,7 @@
 import { Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import DragabbleCard from "./DragabbleCard";
+import CreateElement from "./CreateElement";
 
 const Wrapper = styled.div`
   padding: 10px 0px;
@@ -45,6 +46,7 @@ function Board({ toDos, boardId }: IBoardProps) {
   return (
     <Wrapper>
       <Title>{boardId}</Title>
+      <CreateElement boardId={boardId} />
       <Droppable droppableId={boardId}>
         {(magic, info) => (
           <Area
