@@ -22,6 +22,16 @@ export default function ToDo({ text, category, id }: IToDo) {
       ];
     });
   };
+
+  const handleDelete = () => {
+    setToDos((oldToDos) => {
+      const targetIndex = oldToDos.findIndex((toDo) => toDo.id === id);
+      return [
+        ...oldToDos.slice(0, targetIndex),
+        ...oldToDos.slice(targetIndex + 1),
+      ];
+    });
+  };
   return (
     <>
       <li>
@@ -41,6 +51,7 @@ export default function ToDo({ text, category, id }: IToDo) {
             Done
           </button>
         )}
+        <button onClick={handleDelete}>delete</button>
       </li>
     </>
   );
