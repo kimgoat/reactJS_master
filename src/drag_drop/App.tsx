@@ -45,11 +45,7 @@ export default function App() {
         prevBoard.splice(source.index, 1);
 
         const headBoard = [...allBoards[destination?.droppableId]];
-        headBoard.splice(
-          destination?.index,
-          0,
-          allBoards[source.droppableId][source.index]
-        );
+        headBoard.splice(destination?.index, 0, draggableId);
 
         return {
           ...allBoards,
