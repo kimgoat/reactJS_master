@@ -38,6 +38,25 @@ export default function App() {
           [source.droppableId]: boardCopy,
         };
       });
+    } else {
+      if (!destination) return;
+      setToDos((allBoards) => {
+        const prevBoard = [...allBoards[source.droppableId]];
+        prevBoard.splice(source.index, 1);
+
+        const headBoard = [...allBoards[destination?.droppableId]];
+        headBoard.splice(
+          destination?.index,
+          0,
+          allBoards[source.droppableId][source.index]
+        );
+
+        return {
+          ...allBoards,
+          [destination?.droppableId]: headBoard,
+          [source.droppableId]: prevBoard,
+        };
+      });
     }
   };
 
