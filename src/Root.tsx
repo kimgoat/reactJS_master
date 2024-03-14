@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import ToDoList from "./components/ToDoList";
+import Ex1 from "./practice/Ex1";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -62,7 +63,8 @@ function Root() {
   return (
     <>
       <GlobalStyle />
-      <ToDoList />
+      {/* <ToDoList /> */}
+      <Ex1 />
     </>
   );
 }
