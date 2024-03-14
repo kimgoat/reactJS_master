@@ -9,11 +9,11 @@ import { darkTheme } from "./theme";
 const element = document.getElementById("root");
 const root = createRoot(element as Element);
 root.render(
-  <React.StrictMode>
-    <RecoilRoot>
-      <ThemeProvider theme={darkTheme}>
-        <RouterProvider router={router} />
-      </ThemeProvider>
-    </RecoilRoot>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <RecoilRoot>
+    <ThemeProvider theme={darkTheme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
+  </RecoilRoot>
+  // </React.StrictMode>
 );
