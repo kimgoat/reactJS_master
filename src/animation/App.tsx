@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Variants, motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { useState } from "react";
 
 const Wrapper = styled(motion.div)`
@@ -26,7 +26,7 @@ const Box = styled(motion.div)`
 `;
 
 const box: Variants = {
-  initial: {
+  invisible: {
     x: 500,
     opacity: 0,
     scale: 0,
