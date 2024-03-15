@@ -14,15 +14,14 @@ export default function CreateElement({ boardId }: ICreateElementProps) {
   const { register, handleSubmit, setValue } = useForm<IFormData>();
 
   const onValid = ({ toDo }: IFormData) => {
-    setToDos((oldToDos) => {
-      console.log([...oldToDos[boardId]]);
-      const copyBoard = [toDo, ...oldToDos[boardId]];
-      return {
-        ...oldToDos,
-        [boardId]: copyBoard,
-      };
-    });
-
+    // setToDos((oldToDos) => {
+    //   console.log([...oldToDos[boardId]]);
+    //   const copyBoard = [toDo, ...oldToDos[boardId]];
+    //   return {
+    //     ...oldToDos,
+    //     [boardId]: copyBoard,
+    //   };
+    // });
     setValue("toDo", "");
   };
   return (
