@@ -26,8 +26,13 @@ const Box = styled(motion.div)`
 `;
 
 const box: Variants = {
-  invisible: {
+  prevInvisible: {
     x: 500,
+    opacity: 0,
+    scale: 0,
+  },
+  headInvisible: {
+    x: -500,
     opacity: 0,
     scale: 0,
   },
@@ -39,29 +44,33 @@ const box: Variants = {
       duration: 1,
     },
   },
-  exit: { x: -500, opacity: 0, scale: 0, transition: { duration: 1 } },
+  prevExit: { x: -500, opacity: 0, scale: 0, transition: { duration: 1 } },
+  headExit: { x: 500, opacity: 0, scale: 0, transition: { duration: 1 } },
 };
 
 function App() {
   const [visible, setVisible] = useState(1);
-  const nextPlease = () => setVisible((prev) => (prev === 10 ? 10 : prev + 1));
-  const prevPlease = () => setVisible((prev) => (prev === 1 ? 1 : prev - 1));
+  const [isNext, setIsNext] = useState(true);
+  const nextPlease = () => {
+    setIsNext(true);
+    setVisible((prev) => (prev === 10 ? 10 : prev + 1));
+  };
+  const prevPlease = () => {
+    setIsNext(false);
+    setVisible((prev) => (prev === 1 ? 1 : prev - 1));
+  };
   return (
     <Wrapper>
       <AnimatePresence>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) =>
-          i === visible ? (
-            <Box
-              variants={box}
-              initial="invisible"
-              animate="visible"
-              exit="exit"
-              key={i}
-            >
-              {i}
-            </Box>
-          ) : null
-        )}
+        <Box
+          variants={box}
+          initial={isNext ? "prevInvisible" : "headInvisible"}
+          animate="visible"
+          exit={isNext ? "prevExit" : "headExit"}
+          key={visible}
+        >
+          {visible}
+        </Box>
       </AnimatePresence>
       <button onClick={nextPlease}>next</button>
       <button onClick={prevPlease}>prev</button>
