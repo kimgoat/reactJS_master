@@ -30,8 +30,9 @@ export default function App() {
       // same board movement.
       setToDos((allBoards) => {
         const boardCopy = [...allBoards[source.droppableId]];
+        const taskObj = boardCopy[source.index];
         boardCopy.splice(source.index, 1);
-        boardCopy.splice(destination?.index, 0, draggableId);
+        boardCopy.splice(destination?.index, 0, taskObj);
         return {
           ...allBoards,
           [source.droppableId]: boardCopy,
@@ -42,10 +43,11 @@ export default function App() {
       if (!destination) return;
       setToDos((allBoards) => {
         const prevBoard = [...allBoards[source.droppableId]];
+        const taskObj = prevBoard[source.index];
         prevBoard.splice(source.index, 1);
 
         const headBoard = [...allBoards[destination?.droppableId]];
-        headBoard.splice(destination?.index, 0, draggableId);
+        headBoard.splice(destination?.index, 0, taskObj);
 
         return {
           ...allBoards,
