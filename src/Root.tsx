@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import ToDoList from "./components/ToDoList";
+import ToDoList from "./todo/components/ToDoList";
 import Ex1 from "./practice/Ex1";
 import App from "./drag_drop/App";
 
