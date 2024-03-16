@@ -116,8 +116,8 @@ function Home() {
                 key={index}
               >
                 {data?.results
-                  .slice(1)
-                  .slice(offset * index, offset * index + offset)
+                  .slice(1) // cover에 사용한 첫번째 요소를 배열에서 삭제
+                  .slice(offset * index, offset * index + offset) // banner 클릭시 상태가 변하는 index와 화면에 보일 영화 포스터 갯수인 offset을 통해 슬라이드 구현
                   .map((i) => (
                     <Box
                       key={i.id}
