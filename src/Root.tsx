@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
-import App from "./netflix/App";
+import { Outlet } from "react-router-dom";
+import Header from "./netflix/components/Header";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -62,7 +63,8 @@ function Root() {
   return (
     <>
       <GlobalStyle />
-      <App />
+      <Header />
+      <Outlet />
     </>
   );
 }
