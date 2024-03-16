@@ -6,10 +6,10 @@ declare module "styled-components" {
     black: {
       veryDark: string;
       darker: string;
-      ligter: string;
+      lighter: string;
     };
     white: {
-      ligter: string;
+      lighter: string;
       darker: string;
     };
   }

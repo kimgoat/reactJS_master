@@ -5,10 +5,10 @@ export const theme: DefaultTheme = {
   black: {
     veryDark: "#141414",
     darker: "#181818",
-    ligter: "#2f2f2f",
+    lighter: "#2f2f2f",
   },
   white: {
     darker: "#e5e5e5",
-    ligter: "#fff",
+    lighter: "#fff",
   },
 };
