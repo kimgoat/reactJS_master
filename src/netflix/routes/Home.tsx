@@ -52,12 +52,32 @@ const Row = styled(motion.div)`
 `;
 
 const Box = styled(motion.div)<{ itemPhoto: string }>`
-  background-color: whitesmoke;
-  height: 250px;
-  font-size: 20px;
+  height: 200px;
   background-image: url(${(props) => props.itemPhoto});
+  background-position: center center;
   background-size: cover;
+  &:first-child {
+    transform-origin: center left;
+  }
+  &:last-child {
+    transform-origin: center right;
+  }
 `;
+
+const boxVariants: Variants = {
+  normal: {
+    scale: 1,
+  },
+  hover: {
+    scale: 1.3,
+    y: -50,
+    transition: {
+      delay: 0.5,
+      duaration: 0.3,
+      type: "tween",
+    },
+  },
+};
 
 const rowVariants: Variants = {
   hidden: {
@@ -118,10 +138,17 @@ function Home() {
                 {data?.results
                   .slice(1) // cover에 사용한 첫번째 요소를 배열에서 삭제
                   .slice(offset * index, offset * index + offset) // banner 클릭시 상태가 변하는 index와 화면에 보일 영화 포스터 갯수인 offset을 통해 슬라이드 구현
-                  .map((i) => (
+                  .map((movie) => (
                     <Box
-                      key={i.id}
-                      itemPhoto={makeImgPath(i.poster_path || "")}
+                      key={movie.id}
+                      variants={boxVariants}
+                      initial="normal"
+                      whileHover="hover"
+                      transition={{ type: "tween" }}
+                      itemPhoto={makeImgPath(
+                        movie.backdrop_path || movie.poster_path,
+                        "w500"
+                      )}
                     ></Box>
                   ))}
               </Row>
