@@ -25,3 +25,30 @@ export function getMovies() {
     (response) => response.json()
   );
 }
+
+interface ISearch {
+  adult: boolean;
+  backdrop_path: string;
+  id: number;
+  media_type: string;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  title: string;
+}
+
+export interface IGetSearchResult {
+  page: number;
+  results: ISearch[];
+  total_pages: number;
+  total_results: number;
+}
+
+export function getSearch(keyword: string) {
+  return fetch(
+    `${BASE_PATH}/search/multi?api_key=${API_KEY}&language=en-US&query=${keyword}&page=1&include_adult=false`
+  ).then((response) => response.json());
+}
