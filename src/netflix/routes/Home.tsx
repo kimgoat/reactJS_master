@@ -133,12 +133,21 @@ const overlay: Variants = {
   exit: { backgroundColor: "rgba(0, 0, 0, 0)" },
 };
 
+const BigMovie = styled(motion.div)`
+  width: 40vw;
+  height: 80vh;
+  background-color: pink;
+  border-radius: 3px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+`;
+
 const offset = 6;
 
 function Home() {
   const navigate = useNavigate();
   const bigMovieMatch = useMatch("/movies/:movieId");
-  // console.log(bigMovieMatch);
   const { data, isLoading } = useQuery<IGetMoviesResult>(
     ["movies", "nowPlaying"],
     getMovies
@@ -214,26 +223,16 @@ function Home() {
               <Overlay
                 variants={overlay}
                 onClick={() => {
-                  // console.log(bigMovieMatch.params.movieId);
+                  console.log("over");
                   navigate(``);
                 }}
                 initial="hidden"
                 animate="visible"
                 exit="exit"
               >
-                <motion.div
-                  layoutId={bigMovieMatch.params.movieId}
-                  style={{
-                    position: "absolute",
-                    width: "40vw",
-                    height: "80vh",
-                    backgroundColor: "red",
-                    top: 50,
-                    left: 0,
-                    right: 0,
-                    margin: "0 auto",
-                  }}
-                />
+                <BigMovie layoutId={bigMovieMatch.params.movieId}>
+                  hello
+                </BigMovie>
               </Overlay>
             ) : null}
           </AnimatePresence>
