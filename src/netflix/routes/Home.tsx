@@ -4,6 +4,7 @@ import { motion, AnimatePresence, Variants } from "framer-motion";
 import styled from "styled-components";
 import { makeImgPath } from "../utils";
 import { useState } from "react";
+import { useNavigate, useMatch } from "react-router-dom";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -56,6 +57,7 @@ const Box = styled(motion.div)<{ itemPhoto: string }>`
   background-image: url(${(props) => props.itemPhoto});
   background-position: center center;
   background-size: cover;
+  cursor: pointer;
   &:first-child {
     transform-origin: center left;
   }
@@ -115,14 +117,34 @@ const infoVariants: Variants = {
   },
 };
 
+const Overlay = styled(motion.div)`
+  top: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const overlay: Variants = {
+  hidden: { backgroundColor: "rgba(0, 0, 0, 0)" },
+  visible: { backgroundColor: "rgba(0, 0, 0, 0.5)" },
+  exit: { backgroundColor: "rgba(0, 0, 0, 0)" },
+};
+
 const offset = 6;
 
 function Home() {
+  const navigate = useNavigate();
+  const bigMovieMatch = useMatch("/movies/:movieId");
+  // console.log(bigMovieMatch);
   const { data, isLoading } = useQuery<IGetMoviesResult>(
     ["movies", "nowPlaying"],
     getMovies
   );
 
+  const [id, setId] = useState<null | string>(null);
   const [index, setIndex] = useState(0);
   const [leaving, setLeaving] = useState(false);
   const incraseIndex = () => {
@@ -164,6 +186,11 @@ function Home() {
                   .slice(offset * index, offset * index + offset) // banner 클릭시 상태가 변하는 index와 화면에 보일 영화 포스터 갯수인 offset을 통해 슬라이드 구현
                   .map((movie) => (
                     <Box
+                      layoutId={movie.id + ""}
+                      onClick={() => {
+                        navigate(`/movies/${movie.id}`);
+                        setId(movie.id + "");
+                      }}
                       key={movie.id}
                       variants={boxVariants}
                       initial="normal"
@@ -182,6 +209,34 @@ function Home() {
               </Row>
             </AnimatePresence>
           </Slider>
+          <AnimatePresence>
+            {bigMovieMatch ? (
+              <Overlay
+                variants={overlay}
+                onClick={() => {
+                  // console.log(bigMovieMatch.params.movieId);
+                  navigate(``);
+                }}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <motion.div
+                  layoutId={bigMovieMatch.params.movieId}
+                  style={{
+                    position: "absolute",
+                    width: "40vw",
+                    height: "80vh",
+                    backgroundColor: "red",
+                    top: 50,
+                    left: 0,
+                    right: 0,
+                    margin: "0 auto",
+                  }}
+                />
+              </Overlay>
+            ) : null}
+          </AnimatePresence>
         </>
       )}
     </Wrapper>
